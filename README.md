@@ -46,8 +46,8 @@ The physical doll is designed in traditional Sri Lankan costume, with electronic
 
 - **Costume NFC Tags:** NFC tags are placed inside flowers or accessories on the doll's head. Different accessories represent different costumes, cultures, regions, or festivals.
 - **Microphone and Speaker:** Built into the face to support listening, speaking, conversations, and audio playback.
-- **Chest Sensor:** Triggers the "Ayubowan" greeting when touched.
-- **Stomach Sensor:** Triggers traditional songs and kavi when touched.
+- **Chest button:** Triggers the "Ayubowan" greeting when touched.
+- **Stomach button:** Triggers traditional songs and kavi when touched.
 - **LED Bracelet:** Displays the doll's status:
   - Red – Low battery.
   - Green – Fully charged.
