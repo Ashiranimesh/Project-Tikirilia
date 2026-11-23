@@ -235,7 +235,7 @@ The following technologies are potential choices for implementation and are subj
 
 ## 🔗 System Integration
 
-The project contains several components that must work together to deliver the complete Smart Tikirilia experience.
+The project contains various components that must work together to deliver the complete Smart Tikirilia experience.
 
 - The mobile application provides the user interface and doll interaction features.
 - The firmware controls the doll's electronic components and responds to sensor and NFC interactions.
