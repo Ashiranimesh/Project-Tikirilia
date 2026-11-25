@@ -1,6 +1,8 @@
-
+from dotenv import load_dotenv
 from livekit.agents import Agent, AgentServer, AgentSession,JobContext, cli
 from livekit.plugins import google
+
+load_dotenv()
 
 
 class TikiriliaAssistant(Agent):
@@ -20,6 +22,7 @@ class TikiriliaAssistant(Agent):
             Keep your responses friendly, clear, and conversational.
             """,
             llm=google.realtime.RealtimeModel(
+                 model="gemini-3.8-live",
                  voice="Puck",
                  temperature=0.8,
           ),
