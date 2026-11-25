@@ -137,16 +137,16 @@ smart-tikirilia/
 │   ├── release-roadmap.md
 │   └── meeting-minutes/
 │
-├── team-website/
-│   ├── README.md
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── assets/
-│   │   └── styles/
-│   ├── tests/
-│   └── package.json
+├── ai-agent
+│   
+│   
+│   
+│  
+│   
+│   
+│  
+│  
+│   
 │
 ├── mobile-app/
 │   ├── README.md
