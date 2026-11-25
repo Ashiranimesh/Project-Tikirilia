@@ -1,5 +1,5 @@
 
-from livekit.agents import Agent, AgentServer, AgentSession, cli
+from livekit.agents import Agent, AgentServer, AgentSession,JobContext, cli
 from livekit.plugins import google
 
 
@@ -25,3 +25,21 @@ class TikiriliaAssistant(Agent):
           ),
             
         )
+
+server = AgentServer()
+@server.rtc_session()
+async def entrypoint(ctx: JobContext):
+    session = AgentSession()
+
+    await session.start(
+        agent=TikiriliaAssistant(),
+        room=ctx.room,
+    )
+
+    await ctx.connect()
+
+if __name__ == "__main__":
+    cli.run_app(server)
+
+if __name__ == "__main__":
+    cli.run_app(server)
