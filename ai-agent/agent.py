@@ -1,5 +1,6 @@
+from google.genai import types
 from dotenv import load_dotenv
-from livekit.agents import Agent, AgentServer, AgentSession,JobContext, cli
+from livekit.agents import Agent, AgentServer, AgentSession, JobContext, cli
 from livekit.plugins import google
 
 load_dotenv()
@@ -37,15 +38,36 @@ Keep responses clear, friendly, and not unnecessarily long.
                  model="gemini-3.8-live",
                  voice="Sulafat",
                  temperature=0.8,
+                 input_audio_transcription=types.AudioTranscriptionConfig(),
           ),
             
         )
 
 server = AgentServer()
+
+
 @server.rtc_session()
 async def entrypoint(ctx: JobContext):
-    session = AgentSession()
+    session = AgentSession(
+        user_away_timeout=20.0
+    )
 
+    # Detect user inactivity
+    @session.on("user_state_changed")
+    def on_user_state_changed(event):
+        if event.new_state == "away":
+            print("User is inactive. Closing conversation...")
+            session.shutdown()
+
+    # Detect goodbye phrase
+    @session.on("user_input_transcribed")
+    def on_user_input_transcribed(event):
+        if event.is_final:
+            if "goodbye tikirilia" in event.transcript.lower():
+                print("Goodbye detected. Closing conversation...")
+                session.shutdown()
+
+    # Start the AI agent
     await session.start(
         agent=TikiriliaAssistant(),
         room=ctx.room,
@@ -53,8 +75,7 @@ async def entrypoint(ctx: JobContext):
 
     await ctx.connect()
 
-if __name__ == "__main__":
-    cli.run_app(server)
 
 if __name__ == "__main__":
     cli.run_app(server)
+
