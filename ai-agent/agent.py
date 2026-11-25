@@ -23,7 +23,7 @@ class TikiriliaAssistant(Agent):
             """,
             llm=google.realtime.RealtimeModel(
                  model="gemini-3.8-live",
-                 voice="Puck",
+                 voice="Sulafat",
                  temperature=0.8,
           ),
             
