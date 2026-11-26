@@ -45,7 +45,6 @@ Keep responses clear, friendly, and not unnecessarily long.
 
 server = AgentServer()
 
-
 @server.rtc_session()
 async def entrypoint(ctx: JobContext):
     session = AgentSession(
@@ -62,7 +61,11 @@ async def entrypoint(ctx: JobContext):
     # Detect goodbye phrase
     @session.on("user_input_transcribed")
     def on_user_input_transcribed(event):
+        print("TRANSCRIPTION EVENT TRIGGERED")
+
         if event.is_final:
+            print(f"Recognized speech: {event.transcript!r}")
+
             if "goodbye tikirilia" in event.transcript.lower():
                 print("Goodbye detected. Closing conversation...")
                 session.shutdown()
