@@ -1,4 +1,3 @@
-from difflib import SequenceMatcher
 from google.genai import types
 from dotenv import load_dotenv
 from livekit.agents import Agent, AgentServer, AgentSession, JobContext, cli
@@ -67,20 +66,22 @@ async def entrypoint(ctx: JobContext):
 
             print(f"Recognized speech: {event.transcript!r}")
 
-            words = transcript.replace(",", "").replace(".", "").split()
+            # Remove punctuation
+            transcript = transcript.replace(",", "").replace(".", "")
+            transcript = transcript.replace("!", "").replace("?", "")
 
-            if len(words) >= 2 and words[0] == "goodbye":
-                spoken_name = "".join(words[1:])
+            # Supported goodbye phrases
+            goodbye_phrases = [
+                "goodbye tikirilia",
+                "goodbye",
+                "bye tikirilia",
+                "see you tikirilia"
+            ]
 
-                similarity = SequenceMatcher(
-                    None,
-                    spoken_name,
-                    "tikirilia"
-                ).ratio()
-
-                if similarity >= 0.65:
-                    print("Goodbye detected. Closing conversation...")
-                    session.shutdown()
+            if transcript.strip() in goodbye_phrases:
+                print(f"Goodbye phrase detected: {transcript}")
+                print("Closing conversation...")
+                session.shutdown()
 
     # Start the AI agent
     await session.start(
