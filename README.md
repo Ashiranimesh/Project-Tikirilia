@@ -221,7 +221,7 @@ The following technologies are potential choices for implementation and are subj
 | Component | Proposed Technologies |
 |---|---|
 | Team Website | React, TypeScript, HTML, CSS |
-| Mobile Application | Flutter, Dart |
+| Mobile Application | Reactnative, Javscript |
 | Backend | Java, Spring Boot |
 | Firmware | C++, ESP32 |
 | Version Control | Git, GitHub |
